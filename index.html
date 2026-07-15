@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adeyemi Joseph — AI & Mobile Engineer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2358e6a0'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Sora,system-ui,sans-serif' font-size='12' font-weight='700' fill='%23080c10'%3EAJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:       #080c10;
+    --void-2:     #0d1117;
+    --void-3:     #161b22;
+    --shell:      #f6f8fa;
+    --shell-2:    #eaedf1;
+    --wire:       #30363d;
+    --wire-soft:  #21262d;
+    --pulse:      #58e6a0;
+    --pulse-dim:  rgba(88,230,160,0.10);
+    --pulse-mid:  rgba(88,230,160,0.30);
+    --glow:       #3be08c;
+    --ink:        #0d1117;
+    --ink-mid:    #444c56;
+    --ink-soft:   #768390;
+    --lt:         #cdd9e5;
+    --ld:         #768390;
+    --blue:       #1a6fff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', system-ui, sans-serif;
+    background: var(--shell);
+    color: var(--ink);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    height: 62px;
+    background: rgba(8,12,16,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--wire);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--pulse); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--ld); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--ld);
+    text-decoration: none; letter-spacing: 0.07em; text-transform: uppercase;
+    transition: color .18s;
+  }
+  .nav-links a:hover { color: var(--pulse); }
+  @media(max-width:640px){ .nav-links { display: none; } }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--void);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem clamp(1.5rem, 5vw, 4rem) 4rem;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--wire-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--wire-soft) 1px, transparent 1px);
+    background-size: 52px 52px; opacity:.18; pointer-events:none;
+  }
+  #hero::after {
+    content:''; position:absolute; top:-100px; left:-60px;
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(88,230,160,.09) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner { max-width: 820px; position: relative; z-index:1; }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem; color: var(--pulse);
+    letter-spacing: .15em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .hero-eyebrow::before {
+    content:'▶'; font-size:.55rem;
+    animation: blink 1.2s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-name {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    font-weight: 800; color: var(--lt);
+    line-height: 1.06; letter-spacing: -.022em;
+    margin-bottom: .9rem;
+  }
+  .hero-name .accent { color: var(--pulse); }
+
+  .hero-terminal {
+    display: flex; align-items: center; gap: .5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(.95rem, 2vw, 1.25rem);
+    font-weight: 300; color: var(--ld);
+    margin-bottom: 2rem; min-height: 2rem;
+  }
+  .tp { color: var(--pulse); flex-shrink:0; user-select:none; }
+  #typed { color: var(--lt); font-weight:400; }
+  .cursor {
+    display:inline-block; width:2px; height:1.1em;
+    background:var(--pulse); margin-left:2px;
+    animation: blink .8s step-end infinite;
+    vertical-align:middle; flex-shrink:0;
+  }
+
+  .hero-bio {
+    font-size: 1rem; color: var(--ld);
+    max-width: 540px; line-height: 1.78; margin-bottom: 2.6rem;
+  }
+  .cta-row { display:flex; gap:1rem; flex-wrap:wrap; }
+
+  .btn-p {
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.76rem 1.55rem;
+    background:var(--pulse); color:var(--void);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.8rem; font-weight:700;
+    letter-spacing:.06em; text-transform:uppercase;
+    text-decoration:none; border:none; cursor:pointer;
+    transition: background .18s, transform .14s;
+  }
+  .btn-p:hover { background:var(--glow); transform:translateY(-1px); }
+
+  .btn-g {
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.76rem 1.55rem;
+    border:1px solid var(--wire); color:var(--ld);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.8rem; font-weight:400;
+    letter-spacing:.06em; text-transform:uppercase;
+    text-decoration:none; cursor:pointer; background:transparent;
+    transition: border-color .18s, color .18s;
+  }
+  .btn-g:hover { border-color:var(--pulse); color:var(--pulse); }
+
+  .scroll-hint {
+    position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:.35rem;
+    font-family:'JetBrains Mono',monospace; font-size:.62rem;
+    color:var(--ld); letter-spacing:.1em; text-transform:uppercase;
+    z-index:1; animation: float 2.5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(6px)}
+  }
+
+  /* ── SECTION UTILS ── */
+  section { padding: 5.5rem clamp(1.5rem,5vw,4rem); }
+  .s-label {
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--pulse); margin-bottom:.5rem;
+  }
+  .s-heading {
+    font-family:'Sora',sans-serif;
+    font-size:clamp(1.75rem,3.2vw,2.5rem);
+    font-weight:700; line-height:1.15;
+    letter-spacing:-.015em; margin-bottom:.9rem;
+  }
+  .s-sub {
+    font-size:.97rem; color:var(--ink-mid);
+    max-width:560px; line-height:1.72; margin-bottom:3.2rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--shell); }
+  .about-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:4rem; align-items:start;
+  }
+  @media(max-width:720px){ .about-grid{grid-template-columns:1fr;gap:2.5rem;} }
+  .about-text p {
+    font-size:.97rem; color:var(--ink-mid);
+    line-height:1.8; margin-bottom:1rem;
+  }
+  .about-text p:last-child{margin-bottom:0;}
+  .about-text strong{color:var(--ink);font-weight:600;}
+
+  .stats { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .sc {
+    padding:1.3rem 1.4rem;
+    border:1px solid var(--shell-2); background:#fff;
+    position:relative; overflow:hidden;
+  }
+  .sc::before {
+    content:''; position:absolute; top:0; left:0;
+    width:3px; height:100%; background:var(--pulse);
+  }
+  .sc-num {
+    font-family:'JetBrains Mono',monospace;
+    font-size:1.7rem; font-weight:700;
+    color:var(--ink); line-height:1; margin-bottom:.25rem;
+  }
+  .sc-label { font-size:.75rem; color:var(--ink-soft); }
+
+  /* ── SKILLS ── */
+  #skills { background:var(--void-2); }
+  #skills .s-heading { color:var(--lt); }
+  #skills .s-sub     { color:var(--ld); }
+
+  .skills-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.4rem;
+  }
+  .sg {
+    background:var(--void-3); border:1px solid var(--wire);
+    padding:1.5rem; position:relative; overflow:hidden;
+    transition:border-color .2s;
+  }
+  .sg:hover { border-color:var(--pulse); }
+  .sg::after {
+    content:''; position:absolute; top:0; right:0;
+    width:36px; height:36px; background:var(--pulse-dim);
+    clip-path:polygon(100% 0,0 0,100% 100%);
+  }
+  .sg-cat {
+    font-family:'JetBrains Mono',monospace;
+    font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--pulse); margin-bottom:.8rem;
+  }
+  .sg-icon { font-size:1.3rem; margin-bottom:.6rem; }
+  .sg-title {
+    font-family:'Sora',sans-serif;
+    font-size:.95rem; font-weight:600; color:var(--lt); margin-bottom:.8rem;
+  }
+  .tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+  .tag {
+    font-family:'JetBrains Mono',monospace; font-size:.68rem;
+    padding:.26rem .6rem; border:1px solid var(--wire); color:var(--ld);
+    letter-spacing:.04em; transition:border-color .15s, color .15s;
+  }
+  .sg:hover .tag { border-color:rgba(88,230,160,.28); color:var(--lt); }
+
+  /* ── PROJECTS ── */
+  #projects { background:var(--shell); }
+  .proj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.6rem; }
+
+  .pc {
+    background:#fff; border:1px solid var(--shell-2);
+    overflow:hidden; position:relative;
+    transition:box-shadow .2s, transform .2s;
+    display:flex; flex-direction:column;
+  }
+  .pc:hover { box-shadow:0 8px 28px rgba(0,0,0,.09); transform:translateY(-3px); }
+
+  .pc.featured {
+    grid-column:1/-1;
+    display:grid; grid-template-columns:1fr 1fr;
+  }
+  @media(max-width:640px){ .pc.featured{grid-template-columns:1fr;} }
+
+  /* project visuals */
+  .pv {
+    min-height:190px; display:flex;
+    align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .pv.thinkfest { background:linear-gradient(135deg,#0d1117 0%,#0d2040 100%); }
+  .pv.yumo      { background:linear-gradient(135deg,#0a0a1a 0%,#1a1040 100%); }
+  .pv.feedxpay  { background:linear-gradient(135deg,#051a10 0%,#0a2e1a 100%); }
+  .pv.abide     { background:linear-gradient(135deg,#1a1200 0%,#2e2000 100%); }
+  .pv.whoosh    { background:linear-gradient(135deg,#1a0000 0%,#2e0a0a 100%); }
+  .pv.dice      { background:linear-gradient(135deg,#001a00 0%,#0a2e0a 100%); }
+  .pv.enterprise{ background:linear-gradient(135deg,#001510 0%,#003020 100%); }
+  .pv.project-rams { background:linear-gradient(135deg,#1a0d2e 0%,#0d0a1a 100%); }
+  .pv.primelabs { background:linear-gradient(135deg,#080c10 0%,#0d1117 100%); flex-direction:column; gap:.45rem; }
+
+  /* mock phone */
+  .phone-mock {
+    width:108px; background:#161b26; border:1px solid #30363d;
+    border-radius:10px; overflow:hidden; box-shadow:0 18px 48px rgba(0,0,0,.6);
+    font-family:'JetBrains Mono',monospace; font-size:7px; color:#cdd9e5;
+    flex-shrink:0;
+  }
+  .pm-bar { background:#1f2937; padding:5px 7px; font-size:6.5px; color:var(--pulse); letter-spacing:.05em; }
+  .pm-body { padding:8px; }
+  .pm-label { font-size:6px; color:#f0e68c; margin-bottom:5px; line-height:1.4; }
+  .pm-opt { background:#0d2040; border:1px solid #1e3a5f; border-radius:3px; padding:3px 5px; margin-bottom:3px; font-size:6.5px; color:#cdd9e5; }
+  .pm-opt.ok { border-color:var(--pulse); color:var(--pulse); }
+
+  /* fintech mock */
+  .fintech-mock {
+    width:108px; background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.55);
+    font-family:'Sora',sans-serif; font-size:7px; color:#111;
+  }
+  .fm-header { padding:6px 8px 4px; font-weight:700; font-size:8px; }
+  .fm-green { background:#1a7a50; }
+  .fm-green .fm-header { color:#fff; }
+  .fm-bal { background:rgba(255,255,255,.15); margin:0 6px 5px; border-radius:4px; padding:4px 6px; font-size:7px; color:#fff; }
+  .fm-actions { display:flex; justify-content:space-around; padding:4px 6px 6px; }
+  .fm-action { text-align:center; font-size:6px; color:rgba(255,255,255,.8); }
+  .fm-action-icon { font-size:10px; display:block; }
+  .fm-row { display:flex; justify-content:space-between; padding:3px 8px; font-size:6.5px; border-bottom:1px solid #eee; }
+  .fm-purple { background:#6b47dc; }
+  .fm-purple .fm-header { color:#fff; }
+
+  /* logistics mock */
+  .logistics-mock {
+    width:108px; background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.55);
+    font-family:'Sora',sans-serif; font-size:7px; color:#111;
+  }
+  .lm-bar { background:#d32f2f; padding:5px 8px; color:#fff; font-size:6.5px; font-weight:700; }
+  .lm-row { padding:3px 8px; border-bottom:1px solid #f5f5f5; font-size:6.5px; }
+  .lm-map { background:#e8f0e8; height:40px; display:flex; align-items:center; justify-content:center; font-size:7px; color:#666; }
+
+  /* devotional mock */
+  .devo-mock {
+    width:108px; background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.55);
+    font-family:'Sora',sans-serif; font-size:7px; color:#111;
+  }
+  .dm-img { background:linear-gradient(135deg,#3d2b00,#6b4a00); height:38px; display:flex; align-items:center; justify-content:center; color:#f0d080; font-size:8px; font-weight:700; }
+  .dm-row { padding:3px 8px; border-bottom:1px solid #f0ede0; font-size:6.5px; color:#444; }
+
+  /* hotel mock */
+  .hotel-mock {
+    width:108px; background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.55);
+    font-family:'Sora',sans-serif; font-size:7px; color:#111;
+  }
+  .hm-img { background:linear-gradient(135deg,#0d3d25,#1a6040); height:38px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:8px; }
+  .hm-row { padding:3px 8px; border-bottom:1px solid #eee; font-size:6.5px; }
+  .hm-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; padding:4px 6px; }
+  .hm-cell { background:#e8f5ee; border-radius:2px; padding:3px 2px; text-align:center; font-size:5.5px; color:#1a6040; }
+
+  /* dice mock */
+  .dice-mock {
+    width:108px; background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.55);
+    font-family:'Sora',sans-serif; font-size:7px; color:#111;
+  }
+  .dc-header { background:#0a4d0a; padding:5px 8px; color:#fff; font-weight:700; font-size:8px; }
+  .dc-wallet { background:#0a4d0a; padding:3px 8px 6px; color:#4dff4d; font-size:9px; font-weight:700; }
+  .dc-row { padding:3px 8px; border-bottom:1px solid #eee; font-size:6.5px; }
+
+  /* primelabs visual */
+  .pl-logo-text { font-family:'Sora',sans-serif; font-size:1.3rem; font-weight:800; color:var(--pulse); letter-spacing:-.01em; }
+  .pl-logo-sub { font-family:'JetBrains Mono',monospace; font-size:.58rem; color:var(--ld); letter-spacing:.2em; text-transform:uppercase; }
+
+  /* project RAM visual */
+  .rams-mock {
+    width:108px; background:#e8e0f8; border-radius:16px; overflow:hidden;
+    box-shadow:0 18px 48px rgba(0,0,0,.5);
+    font-family:'Sora',sans-serif; font-size:7px; color:#333;
+  }
+  .rm-head { background:linear-gradient(135deg,#a78bfa,#818cf8); padding:8px; text-align:center; }
+  .rm-circle { width:26px; height:26px; border-radius:50%; background:#fff; margin:0 auto 3px; display:flex; align-items:center; justify-content:center; font-size:10px; }
+  .rm-name { font-size:7px; color:#fff; font-weight:700; }
+  .rm-field { margin:4px 6px; border-bottom:1px solid #c4b5fd; padding-bottom:2px; font-size:6px; color:#555; }
+  .rm-btn { margin:5px 6px 6px; background:#3b82f6; border-radius:3px; padding:3px; text-align:center; color:#fff; font-size:6.5px; font-weight:700; }
+
+  /* project body */
+  .pb { padding:1.6rem; flex:1; display:flex; flex-direction:column; }
+  .pc.featured .pb { justify-content:center; }
+
+  .ptags { display:flex; gap:.45rem; flex-wrap:wrap; margin-bottom:.9rem; }
+  .pt {
+    font-family:'JetBrains Mono',monospace; font-size:.63rem;
+    letter-spacing:.08em; text-transform:uppercase;
+    padding:.2rem .58rem;
+    background:var(--pulse-dim); color:var(--pulse);
+    border:1px solid rgba(88,230,160,.22);
+  }
+  .pt.blue  { background:rgba(26,111,255,.07); color:var(--blue); border-color:rgba(26,111,255,.18); }
+  .pt.grey  { background:var(--shell-2); color:var(--ink-mid); border-color:transparent; }
+  .pt.amber { background:rgba(255,165,0,.08); color:#b87000; border-color:rgba(255,165,0,.2); }
+
+  .pt-title { font-family:'Sora',sans-serif; font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:.55rem; letter-spacing:-.01em; }
+  .pt-desc  { font-size:.87rem; color:var(--ink-mid); line-height:1.68; margin-bottom:1.2rem; flex:1; }
+  .plinks   { display:flex; gap:1rem; align-items:center; margin-top:auto; }
+  .pl-link  { font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:.35rem; transition:color .18s; }
+  .pl-link:hover { color:var(--pulse); }
+  .pl-link.primary { color:var(--pulse); border-bottom:1px solid var(--pulse-mid); padding-bottom:1px; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background:var(--void-2); }
+  #experience .s-heading { color:var(--lt); }
+  #experience .s-sub     { color:var(--ld); }
+
+  .timeline { position:relative; max-width:680px; }
+  .timeline::before { content:''; position:absolute; top:8px; left:0; width:1px; height:calc(100% - 16px); background:var(--wire); }
+  .tl { padding-left:2rem; margin-bottom:2.6rem; position:relative; }
+  .tl:last-child { margin-bottom:0; }
+  .tl::before { content:''; position:absolute; top:8px; left:-4px; width:9px; height:9px; background:var(--pulse); border:2px solid var(--void-2); border-radius:50%; }
+  .tl-date    { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--pulse); letter-spacing:.08em; margin-bottom:.25rem; }
+  .tl-role    { font-family:'Sora',sans-serif; font-size:1rem; font-weight:600; color:var(--lt); margin-bottom:.12rem; }
+  .tl-company { font-size:.83rem; color:var(--ld); margin-bottom:.6rem; }
+  .tl-desc    { font-size:.86rem; color:#6a7681; line-height:1.7; }
+
+  /* ── CONTACT ── */
+  #contact { background:var(--void); text-align:center; position:relative; overflow:hidden; }
+  #contact::before { content:''; position:absolute; bottom:-100px; right:-60px; width:400px; height:400px; background:radial-gradient(circle,rgba(88,230,160,.07) 0%,transparent 70%); pointer-events:none; }
+  #contact .s-label { justify-content:center; display:flex; }
+
+  .contact-headline {
+    font-family:'Sora',sans-serif;
+    font-size:clamp(1.9rem,4vw,3rem); font-weight:700;
+    color:var(--lt); letter-spacing:-.02em; line-height:1.15; margin-bottom:1.1rem;
+  }
+  .contact-headline .accent { color:var(--pulse); }
+  .contact-sub { font-size:.97rem; color:var(--ld); max-width:440px; margin:0 auto 2.6rem; line-height:1.72; }
+
+  .contact-info {
+    display:flex; justify-content:center; flex-wrap:wrap; gap:1.5rem 2.5rem;
+    margin-bottom:2.2rem;
+  }
+  .ci {
+    font-family:'JetBrains Mono',monospace; font-size:.8rem;
+    color:var(--ld); display:flex; align-items:center; gap:.5rem;
+    text-decoration:none; transition:color .18s;
+  }
+  .ci:hover { color:var(--pulse); }
+  .ci-dot { width:6px; height:6px; border-radius:50%; background:var(--pulse); flex-shrink:0; }
+
+  .contact-cta { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--void); border-top:1px solid var(--wire-soft);
+    padding:1.7rem clamp(1.5rem,5vw,4rem);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  }
+  .footer-l { font-family:'JetBrains Mono',monospace; font-size:.73rem; color:var(--ld); }
+  .footer-l strong { color:var(--pulse); }
+  .footer-links { display:flex; gap:1.5rem; list-style:none; }
+  .footer-links a { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--ld); text-decoration:none; letter-spacing:.06em; text-transform:uppercase; transition:color .18s; }
+  .footer-links a:hover { color:var(--pulse); }
+
+  /* ── REVEAL ── */
+  .reveal { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;} *{animation:none!important;transition:none!important;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">adeyemi<span>.joseph</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">AI & Mobile Engineer · Greater Toronto Area · Open to opportunities</p>
+    <h1 class="hero-name">
+      Adeyemi<br>
+      <span class="accent">Joseph.</span>
+    </h1>
+    <div class="hero-terminal">
+      <span class="tp">~$&nbsp;</span>
+      <span id="typed"></span>
+      <span class="cursor"></span>
+    </div>
+    <p class="hero-bio">
+      AI & Mobile Engineer specialising in Flutter · Python · Model Training & Deployment · LLM Integration · On-Device AI — building intelligent cross-platform apps that are fast, clean, and production-ready.
+    </p>
+    <div class="cta-row">
+      <a href="#projects" class="btn-p">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        View Work
+      </a>
+      <a href="#contact" class="btn-g">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 2v11M2.5 8l5 5 5-5" stroke="#58e6a0" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="s-label reveal">// About</p>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="s-heading">Engineer by craft,<br>builder by drive.</h2>
+      <p>I'm <strong>Adeyemi Joseph</strong> — an AI & Mobile Engineer based in the Greater Toronto Area, Canada. I build intelligent cross-platform applications using <strong>Flutter · Python · LLM Integration · On-Device AI</strong>, with 5+ years of experience shipping apps across iOS and Android.</p>
+      <p>As founder of <strong>Prime.Labs</strong>, I'm currently building <strong>ThinkFest</strong> — a real-time multiplayer trivia app for iOS. My work spans fintech, logistics, devotional content, gaming, and AI-powered mobile experiences.</p>
+      <p>I'm committed to leveraging innovation, research, and problem-solving to deliver products that meet real demands and solve real problems — end to end, from architecture to App Store.</p>
+    </div>
+    <div class="stats reveal">
+      <div class="sc">
+        <div class="sc-num">5+</div>
+        <div class="sc-label">Years Flutter & Dart</div>
+      </div>
+      <div class="sc">
+        <div class="sc-num">8+</div>
+        <div class="sc-label">Apps Shipped</div>
+      </div>
+      <div class="sc">
+        <div class="sc-num">iOS &<br>Android</div>
+        <div class="sc-label">Cross-Platform</div>
+      </div>
+      <div class="sc">
+        <div class="sc-num">🇨🇦</div>
+        <div class="sc-label">Richmond Hill, ON</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="s-label reveal">// Skills</p>
+  <h2 class="s-heading reveal">What I build with.</h2>
+  <p class="s-sub reveal">Flutter · Python · Model Training & Deployment · LLM Integration · On-Device AI — a full stack built for intelligent mobile products.</p>
+
+  <div class="skills-grid">
+    <div class="sg reveal">
+      <div class="sg-cat">Core</div>
+      <div class="sg-icon">📱</div>
+      <div class="sg-title">Flutter & Dart</div>
+      <div class="tags">
+        <span class="tag">Flutter</span>
+        <span class="tag">Dart</span>
+        <span class="tag">iOS</span>
+        <span class="tag">Android</span>
+        <span class="tag">Cross-Platform</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">Architecture</div>
+      <div class="sg-icon">🏗</div>
+      <div class="sg-title">Clean Architecture</div>
+      <div class="tags">
+        <span class="tag">Clean Arch</span>
+        <span class="tag">Scalable Code</span>
+        <span class="tag">Riverpod</span>
+        <span class="tag">State Mgmt</span>
+        <span class="tag">SOLID</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">UI/UX</div>
+      <div class="sg-icon">🎨</div>
+      <div class="sg-title">Precise UI Replication</div>
+      <div class="tags">
+        <span class="tag">Figma</span>
+        <span class="tag">UI Mockups</span>
+        <span class="tag">Animations</span>
+        <span class="tag">Responsive</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">Delivery</div>
+      <div class="sg-icon">🚀</div>
+      <div class="sg-title">Deployment & CI/CD</div>
+      <div class="tags">
+        <span class="tag">App Store</span>
+        <span class="tag">Google Play</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Fastlane</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">Backend</div>
+      <div class="sg-icon">⚡</div>
+      <div class="sg-title">Backend & Real-Time</div>
+      <div class="tags">
+        <span class="tag">Firebase</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">WebSockets</span>
+        <span class="tag">Real-Time Sync</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">Ops</div>
+      <div class="sg-icon">📊</div>
+      <div class="sg-title">Monitoring & Analytics</div>
+      <div class="tags">
+        <span class="tag">Performance</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Crash Reporting</span>
+        <span class="tag">Workflows</span>
+      </div>
+    </div>
+    <div class="sg reveal">
+      <div class="sg-cat">AI & ML</div>
+      <div class="sg-icon">🤖</div>
+      <div class="sg-title">AI & LLM Integration</div>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">LLM Integration</span>
+        <span class="tag">Model Training</span>
+        <span class="tag">On-Device AI</span>
+        <span class="tag">Model Deployment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="s-label reveal">// Projects</p>
+  <h2 class="s-heading reveal">Things I've shipped.</h2>
+  <p class="s-sub reveal">Live products across fintech, gaming, logistics, faith, and hospitality — each built with Flutter & Dart.</p>
+
+  <div class="proj-grid">
+
+    <!-- ThinkFest — FEATURED -->
+    <div class="pc featured reveal">
+      <div class="pv thinkfest">
+        <div class="phone-mock">
+          <div class="pm-bar">ThinkFest · Music</div>
+          <div class="pm-body">
+            <div class="pm-label">Q2 of 10 — Which artist released "Thriller"?</div>
+            <div class="pm-opt ok">✓ Michael Jackson</div>
+            <div class="pm-opt">Neil Young</div>
+            <div class="pm-opt">Nicki Minaj</div>
+            <div class="pm-opt">Eric Clapton</div>
+          </div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt">Featured</span><span class="pt blue">ANDROID</span><span class="pt grey">Prime.Labs</span></div>
+        <div class="pt-title">ThinkFest</div>
+        <p class="pt-desc">Real-time multiplayer trivia. Players compete live across Music, Sport & Leisure, Film & TV, and Arts & Literature — with single player, create-room, and join-room modes. Built with Swift and real-time sync at Prime.Labs.</p>
+        <div class="plinks"><a href="https://play.google.com/store/apps/details?id=com.game.trivia&pcampaignid=web_share" target="_blank" class="pl-link primary">PlayStore ↗</a></div>
+      </div>
+    </div>
+
+    <!-- YUMO -->
+    <div class="pc reveal">
+      <div class="pv yumo">
+        <div class="fintech-mock fm-purple">
+          <div class="fm-header">YUMO</div>
+          <div style="padding:4px 8px 2px;font-size:6px;color:rgba(255,255,255,.7);">Financial Command Centre</div>
+          <div style="background:rgba(255,255,255,.1);margin:0 6px 5px;border-radius:4px;padding:4px 6px;font-size:8px;color:#fff;font-weight:700;">$4,280.00</div>
+          <div class="fm-row"><span>AI Insights</span><span style="color:#a78bfa;">↗</span></div>
+          <div class="fm-row"><span>High Expense Alert</span><span style="color:#ff6b6b;">!</span></div>
+          <div style="height:6px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">iOS & Android</span><span class="pt amber">Fintech</span></div>
+        <div class="pt-title">YUMO</div>
+        <p class="pt-desc">An all-in-one financial command centre for modern entrepreneurs, creators, and business owners — featuring AI-powered insights, expense tracking, and smart financial management.</p>
+        <div class="plinks">
+          <a href="#" class="pl-link primary">App Store ↗</a>
+          <a href="#" class="pl-link">Google Play →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedxpay Business -->
+    <div class="pc reveal">
+      <div class="pv feedxpay">
+        <div class="fintech-mock fm-green">
+          <div class="fm-header">Feedxpay Business</div>
+          <div class="fm-bal">Available Balance: $0.50 USD</div>
+          <div class="fm-actions">
+            <div class="fm-action"><span class="fm-action-icon">📥</span>Deposit</div>
+            <div class="fm-action"><span class="fm-action-icon">🔄</span>Exchange</div>
+            <div class="fm-action"><span class="fm-action-icon">💾</span>Save</div>
+          </div>
+          <div class="fm-row"><span>Recent Transactions</span></div>
+          <div class="fm-row"><span>MASTERCARD funded</span><span style="color:#58e6a0;">+$2</span></div>
+          <div style="height:4px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">Android</span><span class="pt amber">Fintech</span></div>
+        <div class="pt-title">Feedxpay Business</div>
+        <p class="pt-desc">A fintech app for businesses facilitating multi-currency financial transactions worldwide — deposits, exchanges, cross-border payments, and multi-currency savings.</p>
+        <div class="plinks"><a href="#" class="pl-link primary">Google Play ↗</a></div>
+      </div>
+    </div>
+
+    <!-- Feedxpay Personal -->
+    <div class="pc reveal">
+      <div class="pv feedxpay" style="background:linear-gradient(135deg,#052a10 0%,#0a3820 100%);">
+        <div class="fintech-mock fm-green">
+          <div class="fm-header">Feedxpay Personal</div>
+          <div class="fm-bal">NGN Balance — Tap To Show</div>
+          <div class="fm-actions">
+            <div class="fm-action"><span class="fm-action-icon">📥</span>Deposit</div>
+            <div class="fm-action"><span class="fm-action-icon">💾</span>Save</div>
+            <div class="fm-action"><span class="fm-action-icon">🔄</span>Exchange</div>
+          </div>
+          <div class="fm-row"><span>Hi, Adee 🎉</span></div>
+          <div class="fm-row"><span>Tag: @minneeee</span></div>
+          <div style="height:4px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">iOS & Android</span><span class="pt amber">Fintech</span></div>
+        <div class="pt-title">Feedxpay Personal</div>
+        <p class="pt-desc">Personal fintech app for multi-currency financial transactions and savings. Features deposit, exchange, and savings across major world currencies. Publishing soon.</p>
+        <div class="plinks"><a href="#" class="pl-link">Coming Soon</a></div>
+      </div>
+    </div>
+
+    <!-- Abide In My Word -->
+    <div class="pc reveal">
+      <div class="pv abide">
+        <div class="devo-mock">
+          <div class="dm-img">✝ AIMWORD</div>
+          <div class="dm-row" style="font-weight:700;font-size:8px;color:#6b4a00;">Today's Content</div>
+          <div class="dm-row">Morning Prayer</div>
+          <div class="dm-row">Mass</div>
+          <div class="dm-row">Meditation</div>
+          <div class="dm-row">Evening Prayer</div>
+          <div style="height:4px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">iOS & Android</span></div>
+        <div class="pt-title">Abide In My Word</div>
+        <p class="pt-desc">A devotional app providing rich biblical content for Catholics and Christians. Freemium model with multiple subscription plans — users can manage, cancel, and update subscriptions any time.</p>
+        <div class="plinks">
+          <a href="#" class="pl-link primary">App Store ↗</a>
+          <a href="#" class="pl-link">Google Play →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Whoosh Logistics -->
+    <div class="pc reveal">
+      <div class="pv whoosh">
+        <div class="logistics-mock">
+          <div class="lm-bar">Whoosh Logistics</div>
+          <div class="lm-map">📍 San Francisco, US</div>
+          <div class="lm-row" style="font-size:7px;">Wallet: ₦101,160.00</div>
+          <div class="lm-row">Send & Receive Package</div>
+          <div class="lm-row">International Shipment</div>
+          <div style="height:4px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">iOS & Android</span></div>
+        <div class="pt-title">Whoosh Logistics</div>
+        <p class="pt-desc">A logistics app for local courier and international shipments — users can move goods effortlessly and monitor the entire delivery process in-app with real-time tracking.</p>
+        <div class="plinks">
+          <a href="#" class="pl-link primary">App Store ↗</a>
+          <a href="#" class="pl-link">Google Play →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dice.ng -->
+    <div class="pc reveal">
+      <div class="pv dice">
+        <div class="dice-mock">
+          <div class="dc-header">DICE.NG</div>
+          <div class="dc-wallet">₦30,040,600</div>
+          <div class="dc-row" style="font-size:7px;font-weight:700;">My Income: ₦40,040,698</div>
+          <div class="dc-row">Amount Played: ₦180M</div>
+          <div class="dc-row">Recent: Tournament</div>
+          <div style="height:4px;"></div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">Android</span></div>
+        <div class="pt-title">DICE.NG</div>
+        <p class="pt-desc">A mobile app to monitor players' records for celebrities, verified, and regular users — tracking wallet balances, income, gameplay history, and tournament participation.</p>
+        <div class="plinks"><a href="#" class="pl-link primary">Google Play ↗</a></div>
+      </div>
+    </div>
+
+    <!-- Enterprise Hotel -->
+    <div class="pc reveal">
+      <div class="pv enterprise">
+        <div class="hotel-mock">
+          <div class="hm-img">🏨 Enterprise Hotel</div>
+          <div class="hm-row" style="font-weight:700;">Welcome, Guest</div>
+          <div class="hm-row">NGN 120,000/night</div>
+          <div class="hm-grid">
+            <div class="hm-cell">🛏 Book</div>
+            <div class="hm-cell">📈 Invest</div>
+            <div class="hm-cell">🛋 Rooms</div>
+            <div class="hm-cell">➕ More</div>
+          </div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt blue">Flutter</span><span class="pt grey">Android</span></div>
+        <div class="pt-title">Enterprise Hotel</div>
+        <p class="pt-desc">Hotel booking and management app — guests can browse rooms, book stays, invest, and access 24-hour front desk, room service, and concierge services all in-app.</p>
+        <div class="plinks"><a href="#" class="pl-link primary">Google Play ↗</a></div>
+      </div>
+    </div>
+
+    <!-- Project RAMS -->
+    <div class="pc reveal">
+      <div class="pv project-rams">
+        <div class="rams-mock">
+          <div class="rm-head">
+            <div class="rm-circle">🌳</div>
+            <div class="rm-name">Prime Autos</div>
+          </div>
+          <div class="rm-field">Email ✉</div>
+          <div class="rm-field">Password 🔒</div>
+          <div style="padding:2px 6px;font-size:5.5px;color:#a78bfa;text-align:right;">forgot password?</div>
+          <div class="rm-btn">Sign In</div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt grey">In Development</span><span class="pt grey">UK & Global</span></div>
+        <div class="pt-title">Project RAMS</div>
+        <p class="pt-desc">Developing a solution to connect potential clients with relevant agencies in the UK and other regions. Details cannot be divulged while still in active development.</p>
+        <div class="plinks"><a href="#contact" class="pl-link">Enquire →</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="s-label reveal">// Experience</p>
+  <h2 class="s-heading reveal">Where I've been.</h2>
+  <p class="s-sub reveal">A track record of shipping real products across fintech, gaming, logistics, and hospitality verticals.</p>
+
+  <div class="timeline">
+    <div class="tl reveal">
+      <div class="tl-date">2023 — Present</div>
+      <div class="tl-role">Founder & Lead Engineer</div>
+      <div class="tl-company">Prime.Labs · Richmond Hill, ON</div>
+      <div class="tl-desc">Founded Prime.Labs, an indie product studio. Building ThinkFest — a real-time multiplayer trivia game — from implementation to PlayStore submission. Leading all product, engineering, and design decisions.</div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-date">Cross-Platform Mobile</div>
+      <div class="tl-role">Flutter Developer (5+ years)</div>
+      <div class="tl-company">Fintech · Logistics · Devotional · Gaming</div>
+      <div class="tl-desc">Delivered 8+ production applications across iOS and Android using Flutter & Dart. Projects span fintech payment systems (Feedxpay, YUMO), logistics tracking (Whoosh), devotional content (Abide In My Word), hotel management (Enterprise), and player record systems (DICE.NG).</div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-date">Architecture & Practices</div>
+      <div class="tl-role">Clean Architecture · CI/CD · Real-Time Systems</div>
+      <div class="tl-company">Flutter · Firebase · WebSockets · App Store · Google Play</div>
+      <div class="tl-desc">Specialise in clean architecture patterns, precise UI/UX mockup replication, real-time backend integration, performance optimisation, and automated deployment pipelines — end-to-end ownership from concept to store.</div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-date">Available</div>
+      <div class="tl-role">Open to Contract & Collaboration</div>
+      <div class="tl-company">Remote · Richmond Hill, ON · +1 (437) 974-2515</div>
+      <div class="tl-desc">Available for Flutter contract work, cross-platform mobile consulting, and co-founder conversations. Particularly interested in fintech, consumer mobile, and social/gaming products.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="s-label reveal">// Contact</p>
+  <h2 class="contact-headline reveal">
+    Let's build something<br>
+    <span class="accent">worth shipping.</span>
+  </h2>
+  <p class="contact-sub reveal">Whether it's a Flutter project, a product collaboration, or just a conversation — I'm reachable.</p>
+
+  <div class="contact-info reveal">
+    <a href="mailto:adeyemi.pj@gmail.com" class="ci">
+      <span class="ci-dot"></span>adeyemi.pj@gmail.com
+    </a>
+    <a href="tel:+14379742515" class="ci">
+      <span class="ci-dot"></span>+1 (437) 974-2515
+    </a>
+    <a href="https://www.linkedin.com/in/adeyemi-joseph-25892816a" target="_blank" class="ci">
+      <span class="ci-dot"></span>LinkedIn ↗
+    </a>
+  </div>
+
+  <div class="contact-cta reveal">
+    <a href="mailto:adeyemi.pj@gmail.com" class="btn-p">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="2.5" width="11" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M1 4l5.5 3.5L12 4" stroke="currentColor" stroke-width="1.3"/></svg>
+      Send Email
+    </a>
+    <a href="https://www.linkedin.com/in/adeyemi-joseph-25892816a" target="_blank" class="btn-g">LinkedIn ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-l">Built by <strong>Adeyemi Joseph</strong> · Prime.Labs · © 2026</div>
+  <ul class="footer-links">
+    <li><a href="#hero">Top</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  // TYPING ANIMATION
+  const phrases = [
+    'AI & Mobile Engineer',
+    'Flutter · Python · On-Device AI',
+    'LLM Integration & Model Deployment',
+    'Founder @ Prime.Labs',
+    'Building Intelligent Cross-Platform Apps',
+  ];
+  let pi = 0, ci = 0, del = false;
+  const el = document.getElementById('typed');
+  function type() {
+    const cur = phrases[pi];
+    if (del) {
+      el.textContent = cur.slice(0, ci - 1); ci--;
+      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(type, 380); return; }
+      setTimeout(type, 28);
+    } else {
+      el.textContent = cur.slice(0, ci + 1); ci++;
+      if (ci === cur.length) { del = true; setTimeout(type, 1900); return; }
+      setTimeout(type, 58);
+    }
+  }
+  setTimeout(type, 700);
+
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -35px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
