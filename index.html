@@ -287,7 +287,29 @@
   .pv.whoosh    { background:linear-gradient(135deg,#1a0000 0%,#2e0a0a 100%); }
   .pv.dice      { background:linear-gradient(135deg,#001a00 0%,#0a2e0a 100%); }
   .pv.enterprise{ background:linear-gradient(135deg,#001510 0%,#003020 100%); }
-  .pv.project-rams { background:linear-gradient(135deg,#1a0d2e 0%,#0d0a1a 100%); }
+  .pv.stratispay { background: linear-gradient(135deg, #1a1a4e 0%, #2d2d8e 50%, #3a3aaa 100%); }
+
+  .stratispay-mock {
+    width: 115px; background: #f0f0fa; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 18px 48px rgba(0,0,0,.55);
+    font-family: 'Sora', sans-serif; font-size: 7px; color: #111;
+  }
+  .sm-sidebar {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 28px;
+    background: #fff; border-right: 1px solid #e0e0f0;
+    display: flex; flex-direction: column; align-items: center; padding-top: 8px; gap: 4px;
+  }
+  .sm-logo { font-size: 8px; font-weight: 900; color: #3a3aaa; line-height:1; }
+  .sm-nav  { font-size: 5px; color: #3a3aaa; background: #e8e8fa; border-radius: 2px; padding: 2px 3px; width: 20px; text-align:center; }
+  .sm-main { margin-left: 30px; padding: 5px 5px 0; }
+  .sm-greeting { font-size: 8px; font-weight: 700; color: #1a1a4e; margin-bottom: 1px; }
+  .sm-sub { font-size: 5.5px; color: #888; margin-bottom: 5px; }
+  .sm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 4px; }
+  .sm-card { background: #fff; border-radius: 4px; padding: 3px 4px; }
+  .sm-card-num { font-size: 7.5px; font-weight: 700; color: #1a1a4e; }
+  .sm-card-label { font-size: 4.5px; color: #888; }
+  .sm-table-row { display: flex; justify-content: space-between; border-bottom: 1px solid #e8e8f5; padding: 2px 0; font-size: 5px; color: #444; }
+  .sm-table-row.header { color: #888; font-weight: 600; }
   .pv.primelabs { background:linear-gradient(135deg,#080c10 0%,#0d1117 100%); flex-direction:column; gap:.45rem; }
 
   /* mock phone */
@@ -529,7 +551,7 @@
       </div>
       <div class="sc">
         <div class="sc-num">🇨🇦</div>
-        <div class="sc-label">Greater Toronto Area, ON</div>
+        <div class="sc-label">Richmond Hill, ON</div>
       </div>
     </div>
   </div>
@@ -561,7 +583,7 @@
       <div class="tags">
         <span class="tag">Clean Arch</span>
         <span class="tag">Scalable Code</span>
-        <span class="tag">Riverpod</span>
+        <span class="tag">BLoC</span>
         <span class="tag">State Mgmt</span>
         <span class="tag">SOLID</span>
       </div>
@@ -648,10 +670,45 @@
         </div>
       </div>
       <div class="pb">
-        <div class="ptags"><span class="pt">Featured</span><span class="pt blue">ANDROID</span><span class="pt grey">Prime.Labs</span></div>
+        <div class="ptags"><span class="pt">Featured</span><span class="pt blue">iOS</span><span class="pt grey">Prime.Labs</span></div>
         <div class="pt-title">ThinkFest</div>
-        <p class="pt-desc">Real-time multiplayer trivia. Players compete live across Music, Sport & Leisure, Film & TV, and Arts & Literature — with single player, create-room, and join-room modes. Built with Swift and real-time sync at Prime.Labs.</p>
-        <div class="plinks"><a href="https://play.google.com/store/apps/details?id=com.game.trivia&pcampaignid=web_share" target="_blank" class="pl-link primary">PlayStore ↗</a></div>
+        <p class="pt-desc">Real-time multiplayer trivia for iOS. Players compete live across Music, Sport & Leisure, Film & TV, and Arts & Literature — with single player, create-room, and join-room modes. Built with Swift and real-time sync at Prime.Labs.</p>
+        <div class="plinks"><a href="#" class="pl-link primary">App Store ↗</a></div>
+      </div>
+    </div>
+
+    <!-- Stratispay Procurement -->
+    <div class="pc reveal">
+      <div class="pv stratispay" style="position:relative; overflow:hidden;">
+        <div class="stratispay-mock" style="position:relative;">
+          <div style="display:flex;">
+            <div class="sm-sidebar">
+              <div class="sm-logo">S</div>
+              <div class="sm-nav" style="margin-top:6px;">⊞</div>
+              <div class="sm-nav">+</div>
+            </div>
+            <div class="sm-main">
+              <div class="sm-greeting">Hi, Adeyemi</div>
+              <div class="sm-sub">Welcome back</div>
+              <div class="sm-cards">
+                <div class="sm-card"><div class="sm-card-num">248</div><div class="sm-card-label">Suppliers</div></div>
+                <div class="sm-card"><div class="sm-card-num">$2.4M</div><div class="sm-card-label">Spend</div></div>
+                <div class="sm-card"><div class="sm-card-num">34</div><div class="sm-card-label">Approvals</div></div>
+                <div class="sm-card"><div class="sm-card-num">1,847</div><div class="sm-card-label">Volume</div></div>
+              </div>
+              <div class="sm-table-row header"><span>PO Number</span><span>Vendor</span><span>Total</span></div>
+              <div class="sm-table-row"><span>PO-2026-0001</span><span>Staples</span><span>$2250</span></div>
+              <div class="sm-table-row"><span>PO-2026-0002</span><span>Dell</span><span>$18500</span></div>
+              <div class="sm-table-row"><span>PO-2026-0003</span><span>Cintas</span><span>$780</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pb">
+        <div class="ptags"><span class="pt">In Development</span><span class="pt blue">AI-Powered</span><span class="pt amber">Procurement</span></div>
+        <div class="pt-title">Stratispay Procurement</div>
+        <p class="pt-desc">An AI-powered procurement platform that helps companies generate intelligent payment terms for their clients — powered by real-time data fed into a multi-model AI pipeline.</p>
+        <div class="plinks"><a href="#contact" class="pl-link">Coming Soon</a></div>
       </div>
     </div>
 
@@ -816,6 +873,7 @@
       </div>
     </div>
 
+
     <!-- Project RAMS -->
     <div class="pc reveal">
       <div class="pv project-rams">
@@ -851,8 +909,8 @@
     <div class="tl reveal">
       <div class="tl-date">2023 — Present</div>
       <div class="tl-role">Founder & Lead Engineer</div>
-      <div class="tl-company">Prime.Labs · Greater Toronto Area, ON</div>
-      <div class="tl-desc">Founded Prime.Labs, an indie product studio. Building ThinkFest — a real-time multiplayer trivia game — from implementation to PlayStore submission. Leading all product, engineering, and design decisions.</div>
+      <div class="tl-company">Prime.Labs · Richmond Hill, ON</div>
+      <div class="tl-desc">Founded Prime.Labs, an independent iOS product studio. Building ThinkFest — a real-time multiplayer trivia game — from Swift architecture to App Store submission. Leading all product, engineering, and design decisions.</div>
     </div>
     <div class="tl reveal">
       <div class="tl-date">Cross-Platform Mobile</div>
@@ -869,7 +927,7 @@
     <div class="tl reveal">
       <div class="tl-date">Available</div>
       <div class="tl-role">Open to Contract & Collaboration</div>
-      <div class="tl-company">Remote · Greater Toronto Area, ON · +1 (437) 974-2515</div>
+      <div class="tl-company">Remote · Richmond Hill, ON · +1 (437) 974-2515</div>
       <div class="tl-desc">Available for Flutter contract work, cross-platform mobile consulting, and co-founder conversations. Particularly interested in fintech, consumer mobile, and social/gaming products.</div>
     </div>
   </div>
